@@ -73,6 +73,31 @@ export async function processOrder(stripeSessionId: string): Promise<void> {
     await (supabase.from("reports") as any)
       .update({ status: "failed", error_message: msg })
       .eq("id", reportRow.id);
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: orderRow } = await (supabase.from("orders") as any)
+        .select("stripe_payment_intent")
+        .eq("id", order.id)
+        .single();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const paymentIntent = (orderRow as any)?.stripe_payment_intent;
+      if (paymentIntent) {
+        const { getStripe } = await import("@/lib/stripe/client");
+        const stripe = getStripe();
+        await stripe.refunds.create({
+          payment_intent: paymentIntent,
+          reason: "requested_by_customer",
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (supabase.from("orders") as any)
+          .update({ status: "refunded" })
+          .eq("id", order.id);
+      }
+    } catch (refundErr) {
+      console.error("[process-order] refund failed", refundErr);
+    }
+
     throw e;
   }
 }
