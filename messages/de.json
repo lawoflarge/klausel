@@ -1,0 +1,17 @@
+{
+  "landing": {
+    "hero_title": "Unterschreib diesen Mietvertrag noch nicht.",
+    "hero_subtitle": "Lade deinen Mietvertrag hoch. Erhalte eine zweisprachige Prüfung mit allen riskanten Klauseln — Mietpreisbremse-Check, ungültige Schönheitsreparaturen-Klauseln, BGH-Urteile als Quellen.",
+    "hero_price": "5 Minuten. €19. Kein Abo nötig.",
+    "cta_upload": "Mietvertrag hochladen",
+    "cta_sample": "Beispielbericht ansehen",
+    "trust": "Gebaut von Ex-Optiver-Quants. Keine Anwaltskanzlei — für verbindliche Rechtsberatung wende dich an einen Rechtsanwalt oder Mieterverein."
+  },
+  "footer": {
+    "disclaimer": "Klausel ist keine Rechtsanwaltskanzlei. Wir bieten KI-gestützte Mietvertragsanalyse und Mieterbildung. Für verbindliche Rechtsberatung wende dich an einen Rechtsanwalt oder Mieterverein.",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "agb": "AGB"
+  },
+  "language": { "en": "English", "de": "Deutsch" }
+}

@@ -1,0 +1,17 @@
+{
+  "landing": {
+    "hero_title": "Don't sign that German Mietvertrag yet.",
+    "hero_subtitle": "Upload your lease. Get a bilingual review with every risky clause flagged — Mietpreisbremse compliance checked, illegal Schönheitsreparaturen-Klauseln spotted, BGH case-law referenced.",
+    "hero_price": "5 minutes. €19. No subscription needed.",
+    "cta_upload": "Upload Mietvertrag",
+    "cta_sample": "See sample report",
+    "trust": "Built by ex-Optiver quants. Not a law firm — for binding advice, consult a Rechtsanwalt or Mieterverein."
+  },
+  "footer": {
+    "disclaimer": "Klausel is not a law firm (Rechtsanwaltskanzlei). We provide AI-powered lease analysis and tenant education. For binding legal advice, consult a Rechtsanwalt or Mieterverein.",
+    "impressum": "Impressum",
+    "datenschutz": "Privacy",
+    "agb": "Terms"
+  },
+  "language": { "en": "English", "de": "Deutsch" }
+}
