@@ -1,6 +1,7 @@
 import { getResend } from "./client";
 import { generateReportPDF } from "@/lib/pdf/generate";
 import type { LeaseAnalysisReportT } from "@/lib/ai/schema";
+import { signResourceToken } from "@/lib/auth/tokens";
 
 export async function sendReportEmail(args: {
   reportId: string;
@@ -9,7 +10,8 @@ export async function sendReportEmail(args: {
 }): Promise<void> {
   const resend = getResend();
   const pdf = await generateReportPDF(args.report);
-  const reportUrl = `${process.env.NEXT_PUBLIC_APP_URL}/report/${args.reportId}`;
+  const token = signResourceToken(args.reportId, "REPORT_TOKEN_SECRET");
+  const reportUrl = `${process.env.NEXT_PUBLIC_APP_URL}/report/${args.reportId}?t=${token}`;
 
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL ?? "noreply@klausel.app",

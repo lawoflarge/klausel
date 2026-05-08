@@ -31,7 +31,8 @@ export default function ProcessPage({
       if (data.status === "completed" && data.reportId) {
         clearInterval(pollInterval);
         clearInterval(stageInterval);
-        router.replace(`/${locale}/report/${data.reportId}`);
+        const tokenParam = data.token ? `?t=${data.token}` : "";
+        router.replace(`/${locale}/report/${data.reportId}${tokenParam}`);
       } else if (data.status === "failed") {
         clearInterval(pollInterval);
         clearInterval(stageInterval);

@@ -4,13 +4,22 @@ import { createServiceRoleClient } from "@/lib/supabase/server";
 import { LeaseAnalysisReport } from "@/lib/ai/schema";
 import { ReportView } from "@/components/report-view";
 import { track } from "@/lib/analytics/posthog-server";
+import { verifyResourceToken } from "@/lib/auth/tokens";
 
 export default async function ReportPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ reportId: string; locale: string }>;
+  searchParams: Promise<{ t?: string }>;
 }) {
   const { reportId } = await params;
+  const { t } = await searchParams;
+
+  if (!verifyResourceToken(reportId, t ?? null, "REPORT_TOKEN_SECRET")) {
+    notFound();
+  }
+
   const supabase = createServiceRoleClient();
   const { data } = await supabase
     .from("reports")

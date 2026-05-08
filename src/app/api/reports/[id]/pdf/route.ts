@@ -2,12 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { LeaseAnalysisReport } from "@/lib/ai/schema";
 import { generateReportPDF } from "@/lib/pdf/generate";
+import { verifyResourceToken } from "@/lib/auth/tokens";
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const token = req.nextUrl.searchParams.get("t");
+  if (!verifyResourceToken(id, token, "REPORT_TOKEN_SECRET")) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 403 });
+  }
   const supabase = createServiceRoleClient();
   const { data } = await supabase
     .from("reports")

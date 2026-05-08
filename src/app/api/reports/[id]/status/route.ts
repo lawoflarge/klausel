@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
+import { signResourceToken } from "@/lib/auth/tokens";
 
 export async function GET(
   _req: NextRequest,
@@ -32,6 +33,16 @@ export async function GET(
 
   if (!report) {
     return NextResponse.json({ status: "queued" });
+  }
+
+  if (report.status === "completed") {
+    const token = signResourceToken(report.id, "REPORT_TOKEN_SECRET");
+    return NextResponse.json({
+      status: report.status,
+      reportId: report.id,
+      token,
+      error: report.error_message ?? null,
+    });
   }
 
   return NextResponse.json({
