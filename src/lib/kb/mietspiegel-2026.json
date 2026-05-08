@@ -1,0 +1,45 @@
+{
+  "version": "2026-05-08",
+  "source": "Stadt-Mietspiegel 2026, gerundet",
+  "mietpreisbremse_active": true,
+  "cities": {
+    "berlin": {
+      "name_en": "Berlin",
+      "name_de": "Berlin",
+      "average_eur_per_sqm": 13.5,
+      "range_eur_per_sqm": [9.0, 22.0],
+      "districts": {
+        "mitte": { "average_eur_per_sqm": 16.0 },
+        "kreuzberg": { "average_eur_per_sqm": 15.0 },
+        "neukoelln": { "average_eur_per_sqm": 13.0 },
+        "charlottenburg": { "average_eur_per_sqm": 14.5 },
+        "pankow": { "average_eur_per_sqm": 13.5 },
+        "friedrichshain": { "average_eur_per_sqm": 15.0 }
+      }
+    },
+    "muenchen": {
+      "name_en": "Munich",
+      "name_de": "München",
+      "average_eur_per_sqm": 19.5,
+      "range_eur_per_sqm": [13.0, 28.0]
+    },
+    "hamburg": {
+      "name_en": "Hamburg",
+      "name_de": "Hamburg",
+      "average_eur_per_sqm": 14.0,
+      "range_eur_per_sqm": [9.0, 22.0]
+    },
+    "frankfurt": {
+      "name_en": "Frankfurt am Main",
+      "name_de": "Frankfurt am Main",
+      "average_eur_per_sqm": 15.5,
+      "range_eur_per_sqm": [10.5, 23.0]
+    },
+    "koeln": {
+      "name_en": "Cologne",
+      "name_de": "Köln",
+      "average_eur_per_sqm": 13.0,
+      "range_eur_per_sqm": [9.0, 19.0]
+    }
+  }
+}

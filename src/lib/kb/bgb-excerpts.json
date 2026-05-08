@@ -1,0 +1,53 @@
+{
+  "version": "2026-05-08",
+  "sections": [
+    {
+      "section": "BGB §535",
+      "title": "Inhalt und Hauptpflichten des Mietvertrags",
+      "summary_en": "Defines the core landlord/tenant obligations: landlord provides the property, tenant pays rent.",
+      "summary_de": "Hauptpflichten: Vermieter überlässt Mietsache, Mieter zahlt Miete."
+    },
+    {
+      "section": "BGB §551",
+      "title": "Begrenzung und Anlage von Mietsicherheiten",
+      "summary_en": "Security deposit cannot exceed 3 months' cold rent. Landlord must invest deposit at standard interest.",
+      "summary_de": "Mietkaution maximal 3 Kaltmieten. Vermieter muss verzinslich anlegen."
+    },
+    {
+      "section": "BGB §556",
+      "title": "Vereinbarungen über Betriebskosten",
+      "summary_en": "Operating costs may only be passed on if specified in the lease.",
+      "summary_de": "Betriebskosten dürfen nur umgelegt werden, wenn ausdrücklich vereinbart."
+    },
+    {
+      "section": "BGB §556d",
+      "title": "Mietpreisbremse — zulässige Miethöhe",
+      "summary_en": "In designated tight-housing markets, new rent may not exceed local comparison rent (Mietspiegel) by more than 10%.",
+      "summary_de": "In angespannten Wohnungsmärkten darf die Miete höchstens 10% über der ortsüblichen Vergleichsmiete liegen."
+    },
+    {
+      "section": "BGB §557a",
+      "title": "Staffelmiete",
+      "summary_en": "Step-rent must specify exact increase amounts and dates; Mietpreisbremse applies to each step.",
+      "summary_de": "Staffelmiete muss genaue Beträge und Daten angeben; Mietpreisbremse gilt für jede Stufe."
+    },
+    {
+      "section": "BGB §557b",
+      "title": "Indexmiete",
+      "summary_en": "Index rent ties increases to consumer price index; can only be adjusted once per year.",
+      "summary_de": "Indexmiete koppelt Erhöhung an VPI; Anpassung höchstens einmal jährlich."
+    },
+    {
+      "section": "BGB §573",
+      "title": "Ordentliche Kündigung des Vermieters",
+      "summary_en": "Landlord may terminate only with legitimate interest (e.g., Eigenbedarf, breach by tenant).",
+      "summary_de": "Ordentliche Kündigung durch Vermieter nur bei berechtigtem Interesse."
+    },
+    {
+      "section": "BGB §307",
+      "title": "Inhaltskontrolle Allgemeiner Geschäftsbedingungen",
+      "summary_en": "Standard terms that unduly disadvantage one party are void.",
+      "summary_de": "Allgemeine Geschäftsbedingungen, die den Vertragspartner unangemessen benachteiligen, sind unwirksam."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "version": "2026-05-08",
+  "judgments": [
+    {
+      "case_number": "VIII ZR 47/04",
+      "year": 2004,
+      "topic": "Schönheitsreparaturen — starre Fristenpläne",
+      "invalid_clause_pattern": "Mieter verpflichtet sich, alle 3 Jahre zu streichen / alle 5 Jahre zu tapezieren (rigid timeline regardless of actual condition).",
+      "void_reason_en": "Rigid renovation timelines are void because they require renovation regardless of actual wear.",
+      "void_reason_de": "Starre Fristen für Schönheitsreparaturen sind unwirksam, weil sie Renovierung unabhängig vom tatsächlichen Zustand verlangen.",
+      "legal_anchor": "BGB §307 Abs. 1 i.V.m. §535"
+    },
+    {
+      "case_number": "VIII ZR 152/12",
+      "year": 2013,
+      "topic": "Schönheitsreparaturen — unrenovierte Wohnung",
+      "invalid_clause_pattern": "Pflicht zu Schönheitsreparaturen, wenn die Wohnung unrenoviert oder renovierungsbedürftig übergeben wurde.",
+      "void_reason_en": "Imposing renovation obligations on a tenant who took possession of an unrenovated apartment is void.",
+      "void_reason_de": "Übertragung der Schönheitsreparaturen auf den Mieter ist unwirksam, wenn die Wohnung unrenoviert übergeben wurde.",
+      "legal_anchor": "BGB §307"
+    },
+    {
+      "case_number": "VIII ZR 277/16",
+      "year": 2018,
+      "topic": "Quotenabgeltungsklauseln",
+      "invalid_clause_pattern": "Anteilige Kostenbeteiligung des Mieters bei Auszug, gestaffelt nach Wohndauer.",
+      "void_reason_en": "Pro-rata quota-settlement clauses for renovation are void due to undue burden on the tenant.",
+      "void_reason_de": "Quotenabgeltungsklauseln für Schönheitsreparaturen sind unwirksam wegen unangemessener Benachteiligung des Mieters.",
+      "legal_anchor": "BGB §307 Abs. 1"
+    },
+    {
+      "case_number": "VIII ZR 38/12",
+      "year": 2013,
+      "topic": "Endrenovierungsklauseln",
+      "invalid_clause_pattern": "Mieter muss bei Auszug renovieren, unabhängig vom Zustand.",
+      "void_reason_en": "Mandatory end-of-tenancy renovation regardless of condition is void.",
+      "void_reason_de": "Eine starre Endrenovierungsklausel ist unwirksam.",
+      "legal_anchor": "BGB §307"
+    },
+    {
+      "case_number": "VIII ZR 21/13",
+      "year": 2014,
+      "topic": "Farbwahl-Klauseln",
+      "invalid_clause_pattern": "Vorschrift bestimmter Farben (z.B. nur Weiß) bei Schönheitsreparaturen während der Mietzeit.",
+      "void_reason_en": "Color restrictions imposed during tenancy (vs. at handover) are void.",
+      "void_reason_de": "Vorgaben zur Farbwahl während der Mietzeit sind unwirksam.",
+      "legal_anchor": "BGB §307"
+    }
+  ]
+}
