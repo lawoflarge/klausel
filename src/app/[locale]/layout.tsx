@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { FooterDisclaimer } from "@/components/footer-disclaimer";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           {children}
+          <FooterDisclaimer />
         </NextIntlClientProvider>
       </body>
     </html>
