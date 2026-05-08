@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { createServiceRoleClient } from "@/lib/supabase/server";
+import { signTimedToken } from "@/lib/auth/tokens";
+import { getResend } from "@/lib/email/client";
 
 const Body = z.object({ email: z.string().email() });
 
@@ -11,43 +12,33 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
   const { email } = parsed.data;
-  const supabase = createServiceRoleClient();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: uploads } = await (supabase.from("lease_uploads") as any)
-    .select("id, storage_path")
-    .eq("email", email);
-  if (uploads?.length) {
-    await supabase.storage
-      .from("lease-uploads")
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .remove(uploads.map((u: any) => u.storage_path));
+  // 24h TTL
+  const token = signTimedToken(email, 24 * 60 * 60 * 1000, "DELETE_TOKEN_SECRET");
+  const url = `${process.env.NEXT_PUBLIC_APP_URL}/account/delete/confirm?token=${encodeURIComponent(
+    token
+  )}&email=${encodeURIComponent(email)}`;
+
+  // Send confirmation email (idempotent: always returns 200 even if email doesn't exist,
+  // to avoid leaking which emails are in our system)
+  try {
+    const resend = getResend();
+    await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL ?? "noreply@klausel.app",
+      to: email,
+      subject: "Klausel — confirm data deletion",
+      html: `
+        <p>You (or someone using your email) requested deletion of all Klausel data associated with ${email}.</p>
+        <p><a href="${url}">Click here to confirm deletion</a> (link valid for 24 hours).</p>
+        <p>If you did not request this, ignore this email — no action will be taken.</p>
+        <hr/>
+        <p style="font-size: 12px; color: #666;">Klausel — klausel.app</p>
+      `,
+    });
+  } catch (e) {
+    console.error("[account-delete] confirmation email send failed", e);
+    // Still return 200 — don't leak whether email is registered
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: orders } = await (supabase.from("orders") as any)
-    .select("id")
-    .eq("email", email);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const orderIds = orders?.map((o: any) => o.id) ?? [];
-  if (orderIds.length) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: reports } = await (supabase.from("reports") as any)
-      .select("pdf_storage_path")
-      .in("order_id", orderIds);
-    const pdfPaths = (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      reports?.map((r: any) => r.pdf_storage_path).filter(Boolean) ?? []
-    ) as string[];
-    if (pdfPaths.length) {
-      await supabase.storage.from("report-pdfs").remove(pdfPaths);
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.from("orders") as any).delete().eq("email", email);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.from("lease_uploads") as any).delete().eq("email", email);
-
-  return NextResponse.json({ deleted: true });
+  return NextResponse.json({ ok: true });
 }
