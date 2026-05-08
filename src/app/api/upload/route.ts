@@ -22,7 +22,9 @@ export async function POST(req: NextRequest) {
   const supabase = createServiceRoleClient();
 
   const uploadId = randomUUID();
-  const storagePath = `${uploadId}/${parsed.data.filename}`;
+  const safeName =
+    parsed.data.filename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 100) || "lease.pdf";
+  const storagePath = `${uploadId}/${safeName}`;
 
   const { data: signed, error: signedErr } = await supabase.storage
     .from("lease-uploads")
