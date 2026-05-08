@@ -1,0 +1,27 @@
+MIETVERTRAG für Wohnraum
+
+§1 Mietsache
+Vermieter: Hans Mustermann, Beispielstraße 1, 10115 Berlin
+Mieter: Max Test
+Mietobjekt: 2-Zimmer-Wohnung, Beispielstraße 1, 4. OG, 10115 Berlin, 65 qm
+
+§2 Mietzeit
+Beginn: 01.06.2026
+Befristet auf 24 Monate.
+
+§3 Miete
+Grundmiete: 1.850 € monatlich
+Nebenkosten-Vorauszahlung: 250 €
+Gesamt: 2.100 €
+
+§4 Staffelmiete
+Die Miete erhöht sich jährlich um 5%.
+
+§5 Schönheitsreparaturen
+Der Mieter verpflichtet sich, alle 3 Jahre Küche und Bad und alle 5 Jahre die übrigen Räume zu renovieren. Die Wohnung wurde unrenoviert übergeben.
+
+§6 Tierhaltung
+Tierhaltung jeder Art ist untersagt.
+
+§7 Kaution
+Kaution: 6.000 € (= 3,2 Kaltmieten)
