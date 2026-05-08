@@ -23,6 +23,23 @@ export async function processOrder(stripeSessionId: string): Promise<void> {
     .single();
   if (!upload) throw new Error(`lease_upload ${order.lease_upload_id} missing`);
 
+  // Idempotency check: if a report row already exists for this order, skip.
+  // Prevents duplicate processing on Stripe webhook retries.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: existing } = await (supabase.from("reports") as any)
+    .select("id, status")
+    .eq("order_id", order.id)
+    .limit(1)
+    .single();
+
+  if (existing) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    console.log(
+      `[process-order] order ${order.id} already has report ${existing.id} (status=${(existing as any).status}), skipping`
+    );
+    return;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: reportRow, error: insertErr } = await (supabase.from("reports") as any)
     .insert({ order_id: order.id, status: "processing" })
