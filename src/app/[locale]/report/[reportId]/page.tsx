@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { LeaseAnalysisReport } from "@/lib/ai/schema";
 import { ReportView } from "@/components/report-view";
+import { track } from "@/lib/analytics/posthog-server";
 
 export default async function ReportPage({
   params,
@@ -24,6 +26,9 @@ export default async function ReportPage({
 
   const parsed = LeaseAnalysisReport.safeParse(row.payload);
   if (!parsed.success) notFound();
+
+  const distinctId = (await headers()).get("x-forwarded-for") ?? "anon";
+  await track(distinctId, "report_viewed", { reportId });
 
   return (
     <main className="min-h-screen px-6 py-8 max-w-4xl mx-auto">

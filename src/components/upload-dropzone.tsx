@@ -31,6 +31,16 @@ export function UploadDropzone({ locale }: { locale: string }) {
     }
     setSubmitting(true);
     try {
+      fetch("/api/track", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          distinctId: email,
+          event: "upload_started",
+          properties: { bundesland, baseRentEur: Number(baseRent) },
+        }),
+      }).catch(() => {}); // fire-and-forget, never block upload
+
       const initRes = await fetch("/api/upload", {
         method: "POST",
         headers: { "content-type": "application/json" },

@@ -1,10 +1,19 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { buttonVariants } from "@/components/ui/button";
 import { LanguageToggle } from "@/components/language-toggle";
+import { track } from "@/lib/analytics/posthog-server";
 
-export default function LandingPage() {
-  const t = useTranslations("landing");
+export default async function LandingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("landing");
+  const distinctId = (await headers()).get("x-forwarded-for") ?? "anon";
+  await track(distinctId, "landing_viewed", { locale });
   return (
     <main className="min-h-screen flex flex-col">
       <header className="flex items-center justify-between p-6 border-b">

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyWebhook } from "@/lib/stripe/verify-webhook";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { processOrder } from "@/lib/orders/process-order";
+import { track } from "@/lib/analytics/posthog-server";
 
 export const runtime = "nodejs";
 
@@ -28,6 +29,12 @@ export async function POST(req: NextRequest) {
         stripe_payment_intent: session.payment_intent as string,
       })
       .eq("stripe_session_id", session.id);
+
+    await track(
+      session.customer_email ?? "unknown",
+      "checkout_completed",
+      { sessionId: session.id }
+    );
 
     processOrder(session.id).catch((e) => {
       console.error("[stripe-webhook] processOrder failed", e);
