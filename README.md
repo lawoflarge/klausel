@@ -97,4 +97,4 @@ Then visit `http://localhost:3000/upload`, upload a German lease PDF, complete c
 
 ## License
 
-All rights reserved. Private repository.
+All rights reserved. Source-available for reference; not licensed for reuse or redistribution.
