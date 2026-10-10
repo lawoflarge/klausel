@@ -1,6 +1,6 @@
 # Klausel
 
-AI-powered tenant-rights toolkit for expats in Germany. Wedge feature: **Mietvertrag Review** — upload a German lease, get a bilingual EN/DE report flagging illegal/risky clauses with BGH judgment + BGB section citations, in 5 minutes for €19.
+AI-powered tenant-rights toolkit for expats in Germany. Wedge feature: **Mietvertrag Review**, upload a German lease, get a bilingual EN/DE report flagging illegal/risky clauses with BGH judgment + BGB section citations, in 5 minutes for €19.
 
 ## Status
 
@@ -19,14 +19,14 @@ npm run dev
 
 Open `http://localhost:3000` (English) or `http://localhost:3000/de` (German).
 
-**The killer demo runs without any credentials:** open `http://localhost:3000/sample` (or `/de/sample`) to see a hand-crafted bilingual sample report with 4 flagged clauses + Mietpreisbremse delta — exactly what a real customer will receive.
+**The killer demo runs without any credentials:** open `http://localhost:3000/sample` (or `/de/sample`) to see a hand-crafted bilingual sample report with 4 flagged clauses + Mietpreisbremse delta, exactly what a real customer will receive.
 
 ## What works locally without credentials
 
-- ✅ `/` and `/de` — landing page with hero, CTAs, language toggle
-- ✅ `/sample` and `/de/sample` — bilingual sample report (the conversion-driving demo)
-- ✅ `/impressum`, `/datenschutz`, `/agb` — legal pages
-- ✅ `/upload` — form renders (submission needs Supabase + Stripe)
+- ✅ `/` and `/de`: landing page with hero, CTAs, language toggle
+- ✅ `/sample` and `/de/sample`: bilingual sample report (the conversion-driving demo)
+- ✅ `/impressum`, `/datenschutz`, `/agb`: legal pages
+- ✅ `/upload`: form renders (submission needs Supabase + Stripe)
 
 ## What needs credentials for the full flow
 
@@ -46,27 +46,27 @@ Next.js 16 App Router · TypeScript · Tailwind + shadcn/ui · `next-intl` for E
 
 | Week | Status | Ships |
 |---|---|---|
-| **1** | ✅ Complete | Mietvertrag Review €19 one-shot — landing, upload, Stripe Checkout, AI with BGH/BGB citations, bilingual PDF + email, DSGVO delete + cron cleanup |
+| **1** | ✅ Complete | Mietvertrag Review €19 one-shot: landing, upload, Stripe Checkout, AI with BGH/BGB citations, bilingual PDF + email, DSGVO delete + cron cleanup |
 | 2 | ⏳ Planned | Kaution Recovery letter generator (Pro) |
 | 3 | ⏳ Planned | Anmeldung guide + Mietspiegel deep-dive (Pro) |
 | 4 | ⏳ Planned | Mietvertragskündigung + NKA spot-check (Pro) |
 
 ## Setup (manual prerequisites for full deployment)
 
-1. **Domain** — register `klausel.app`
-2. **Supabase project** (region `eu-central-1`) — apply `supabase/migrations/0001_initial_schema.sql` via SQL Editor; create private buckets `lease-uploads` and `report-pdfs`
-3. **Stripe products** — create €19 one-shot, €9.99/mo Pro, €69/yr Pro Annual; copy 3 price IDs + publishable + secret keys
-4. **Resend account** (separate from any other Klausel-adjacent product) — add `klausel.app` domain, configure SPF/DKIM/DMARC records at registrar
-5. **PostHog EU project** — copy project API key
-6. **Anthropic Console** — create API key
-7. **Vercel** — import `lawoflarge/klausel`, link project, paste env vars
-8. **Generate token secrets** — run 3×:
+1. **Domain**: register `klausel.app`
+2. **Supabase project** (region `eu-central-1`): apply `supabase/migrations/0001_initial_schema.sql` via SQL Editor; create private buckets `lease-uploads` and `report-pdfs`
+3. **Stripe products**: create €19 one-shot, €9.99/mo Pro, €69/yr Pro Annual; copy 3 price IDs + publishable + secret keys
+4. **Resend account** (separate from any other Klausel-adjacent product): add `klausel.app` domain, configure SPF/DKIM/DMARC records at registrar
+5. **PostHog EU project**: copy project API key
+6. **Anthropic Console**: create API key
+7. **Vercel**: import `lawoflarge/klausel`, link project, paste env vars
+8. **Generate token secrets**: run 3×:
    ```powershell
    node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
    ```
    for `DELETE_TOKEN_SECRET`, `REPORT_TOKEN_SECRET`, `CRON_SECRET`
 9. **Replace Impressum placeholder** at `src/app/[locale]/impressum/page.tsx:9` with your Gewerbe address (TMG §5 fineable)
-10. **Pre-launch compliance** — Anwalt T&Cs review (€300-500) + Berufshaftpflichtversicherung quote
+10. **Pre-launch compliance**: Anwalt T&Cs review (€300-500) + Berufshaftpflichtversicherung quote
 
 Copy `.env.example` to `.env.local` and fill in all values.
 
@@ -85,14 +85,14 @@ Then visit `http://localhost:3000/upload`, upload a German lease PDF, complete c
 
 ## Documents
 
-- [Design spec](docs/superpowers/specs/2026-05-08-klausel-design.md) — full product, architecture, pricing, distribution, and risk plan
-- [Week 1 implementation plan](docs/superpowers/plans/2026-05-08-klausel-week-1.md) — 39-task build plan executed via subagent-driven development
+- [Design spec](docs/superpowers/specs/2026-05-08-klausel-design.md): full product, architecture, pricing, distribution, and risk plan
+- [Week 1 implementation plan](docs/superpowers/plans/2026-05-08-klausel-week-1.md): 39-task build plan executed via subagent-driven development
 
 ## Known caveats (address before launch)
 
-- **29 `as any` casts** on Supabase calls due to hand-written type stub — fix by running `npx supabase gen types typescript --project-id <YOUR_PROJECT_ID> --schema public > src/lib/supabase/types.ts` once the Supabase project exists, then remove casts
-- **BGH knowledge base** seeded with 5 judgments — expand to ~30-50 with Anwalt input pre-launch (see `src/lib/kb/bgh-judgments.json`)
-- **AGB + Datenschutzerklärung** are templates — get anwaltlich geprüft before launch
+- **29 `as any` casts** on Supabase calls due to hand-written type stub: fix by running `npx supabase gen types typescript --project-id <YOUR_PROJECT_ID> --schema public > src/lib/supabase/types.ts` once the Supabase project exists, then remove casts
+- **BGH knowledge base** seeded with 5 judgments: expand to ~30-50 with Anwalt input pre-launch (see `src/lib/kb/bgh-judgments.json`)
+- **AGB + Datenschutzerklärung** are templates: get anwaltlich geprüft before launch
 - **Sentry `disableLogger` deprecation warning** at build (non-fatal; current SDK changed the API)
 
 ## License
